@@ -31,6 +31,9 @@ Set up the database:
 ```
 bin/cake migrations migrate
 ```
+```
+bin/cake migrations seed
+```
 
 ### Accessing the Application
 
@@ -39,16 +42,45 @@ The application should now be accessible at http://localhost:34251
 ## How to check
 
 ### Authentication
+I also create User Seed data for testing.
+- user1@mail.com/123456
+- user2@mail.com
 
-TODO: pls summarize how to check "Authentication" bahavior
+All endpoint is attached in root folder *"php-dev-test.postman_collection.json"*
 
-composer require "cakephp/authentication:^2.4"
-bin/cake migrations seed
+**Login**
+- POST: http://localhost:34251/login
+- Form data: email & password; Eg: email: user1@mail.com; password: 123456
+
+**Logout**
+- POST: http://localhost:34251/logout
 
 ### Article Management
+**Create Article**
+- Require: need to Login first.
+- Post: http://localhost:34251/articles/add
+- Form data (refer on Postman Collection)
 
-TODO: pls summarize how to check "Article Management" bahavior
+**List all articles**
+- Get: http://localhost:34251/articles
+
+**Article detail**
+- Get: http://localhost:34251/articles/{id}
+
+**Update Article**
+- Require: Login first
+- Put: http://localhost:34251/articles/edit/{id}
+- Form data (refer on Postman Collection)
+
+**Delete Article**
+- Require: need to Login first.
+- Delete: http://localhost:34251/articles/{id}
+- Form data (refer on Postman Collection)
 
 ### Like Feature
-
-TODO: pls summarize how to check "Like Feature" bahavior
+***
+I created new table "article_likes" to save information as: which user liked article
+***
+**Like an Article**
+- Require: need to Login first.
+- Post: http://localhost:34251/articles/like/{id}

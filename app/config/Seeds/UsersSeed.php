@@ -22,14 +22,24 @@ class UsersSeed extends AbstractSeed
      */
     public function run(): void
     {
-        $data = [
-            'email' => 'user1@mail.com',
-            'password' => (new DefaultPasswordHasher())->hash('123456'),
-            'created_at' => FrozenTime::now()->format('Y-m-d H:i:s'),
-            'updated_at' => FrozenTime::now()->format('Y-m-d H:i:s')
+        $userData = [
+            [
+                'email' => 'user1@mail.com',
+                'password' => (new DefaultPasswordHasher())->hash('password1'),
+                'created_at' => FrozenTime::now()->format('Y-m-d H:i:s'),
+                'updated_at' => FrozenTime::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'email' => 'user2@mail.com',
+                'password' => (new DefaultPasswordHasher())->hash('password2'),
+                'created_at' => FrozenTime::now()->format('Y-m-d H:i:s'),
+                'updated_at' => FrozenTime::now()->format('Y-m-d H:i:s')
+            ]
         ];
-
+    
         $table = $this->table('users');
-        $table->insert($data)->save();
+        foreach ($userData as $data) {
+            $table->insert($data)->save();
+        }
     }
 }
